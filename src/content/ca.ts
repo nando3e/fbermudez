@@ -12,6 +12,7 @@ export const ca: SiteContent = {
     projects: "Projectes",
     education: "Formació",
     contact: "Contacte",
+    menu: "Menú",
   },
   intro: {
     name: "Fernando Bermúdez",

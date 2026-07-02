@@ -31,6 +31,8 @@ export interface SiteContent {
     projects: string;
     education: string;
     contact: string;
+    /** Etiqueta accesible del botón hamburguesa (móvil). */
+    menu: string;
   };
   intro: {
     name: string;

@@ -12,6 +12,7 @@ export const es: SiteContent = {
     projects: "Proyectos",
     education: "Formación",
     contact: "Contacto",
+    menu: "Menú",
   },
   intro: {
     name: "Fernando Bermúdez",
