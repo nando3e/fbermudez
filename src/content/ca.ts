@@ -97,7 +97,7 @@ export const ca: SiteContent = {
         stack: ["PWA", "React", "Telegram", "WhatsApp", "Node.js"],
       },
     ],
-    viewAll: "Veure tots els casos",
+    viewAll: "Veure més projectes",
     caseMore: "Veure més",
   },
   cases: {
@@ -106,13 +106,14 @@ export const ca: SiteContent = {
       "Dotze casos reals d'automatització, agents d'IA i integracions en producció: agents conversacionals, pipelines de dades i sistemes a mida.",
     breadcrumbHome: "Inici",
     eyebrow: "Casos",
-    title: "Tots els casos",
+    title: "Casos en producció",
     intro:
-      "Sistemes reals, construïts a mida i en producció. Els quatre primers amb més detall i captures; la resta, en versió breu.",
+      "Sistemes construïts a mida que avui funcionen en empreses reals. Els quatre primers, amb més detall i captures; la resta, en versió breu.",
     othersTitle: "Més casos",
     galleryPrev: "Captura anterior",
     galleryNext: "Captura següent",
     capturePending: "Captura en preparació",
+    lightboxClose: "Tancar",
     featured: [
       {
         id: "descargas-camiones",

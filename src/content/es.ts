@@ -98,7 +98,7 @@ export const es: SiteContent = {
         stack: ["PWA", "React", "Telegram", "WhatsApp", "Node.js"],
       },
     ],
-    viewAll: "Ver todos los casos",
+    viewAll: "Ver más proyectos",
     caseMore: "Ver más",
   },
   cases: {
@@ -107,13 +107,14 @@ export const es: SiteContent = {
       "Doce casos reales de automatización, agentes de IA e integraciones en producción: agentes conversacionales, pipelines de datos y sistemas a medida.",
     breadcrumbHome: "Inicio",
     eyebrow: "Casos",
-    title: "Todos los casos",
+    title: "Casos en producción",
     intro:
-      "Sistemas reales, construidos a medida y en producción. Los cuatro primeros con más detalle y capturas; el resto, en versión breve.",
+      "Sistemas construidos a medida que hoy funcionan en empresas reales. Los cuatro primeros, con más detalle y capturas; el resto, en versión breve.",
     othersTitle: "Más casos",
     galleryPrev: "Captura anterior",
     galleryNext: "Captura siguiente",
     capturePending: "Captura en preparación",
+    lightboxClose: "Cerrar",
     featured: [
       {
         id: "descargas-camiones",

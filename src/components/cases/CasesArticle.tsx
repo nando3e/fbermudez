@@ -89,6 +89,7 @@ export function CasesArticle({
                 prevLabel={cases.galleryPrev}
                 nextLabel={cases.galleryNext}
                 pendingLabel={cases.capturePending}
+                closeLabel={cases.lightboxClose}
               />
             </article>
           ))}

@@ -99,6 +99,8 @@ export interface SiteContent {
     galleryNext: string;
     /** Texto del hueco de captura pendiente. */
     capturePending: string;
+    /** Etiqueta accesible del botón de cerrar el lightbox. */
+    lightboxClose: string;
     featured: FeaturedCase[];
     groups: CaseGroup[];
   };

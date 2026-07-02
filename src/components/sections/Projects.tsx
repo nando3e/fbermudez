@@ -62,7 +62,7 @@ export function Projects({
           <div className="mt-10">
             <a
               href={`/${locale}/casos`}
-              className="inline-flex items-center gap-2 rounded-full border border-foreground/30 px-5 py-2.5 text-sm font-medium text-foreground transition-colors hover:border-accent/50 hover:bg-accent/15 hover:text-accent-strong"
+              className="inline-flex items-center gap-2 rounded-full bg-foreground px-5 py-2.5 text-sm font-medium text-background transition-colors hover:bg-accent-strong"
             >
               {projects.viewAll}
               <ArrowIcon className="h-4 w-4" />
