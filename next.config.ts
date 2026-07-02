@@ -1,7 +1,10 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  /* config options here */
+  // Build autocontenido para el contenedor (Dokploy/Hetzner).
+  output: "standalone",
+  poweredByHeader: false,
+  reactStrictMode: true,
 };
 
 export default nextConfig;
