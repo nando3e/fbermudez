@@ -14,6 +14,17 @@ export default function sitemap(): MetadataRoute.Sitemap {
     },
   }));
 
+  const casesPages: MetadataRoute.Sitemap = locales.map((locale) => ({
+    url: `${site.url}/${locale}/casos`,
+    changeFrequency: "monthly",
+    priority: 0.7,
+    alternates: {
+      languages: Object.fromEntries(
+        locales.map((l) => [l, `${site.url}/${l}/casos`]),
+      ),
+    },
+  }));
+
   const legalPages: MetadataRoute.Sitemap = locales.flatMap((locale) =>
     ["aviso-legal", "privacidad"].map((slug) => ({
       url: `${site.url}/${locale}/${slug}`,
@@ -22,5 +33,5 @@ export default function sitemap(): MetadataRoute.Sitemap {
     })),
   );
 
-  return [...home, ...legalPages];
+  return [...home, ...casesPages, ...legalPages];
 }

@@ -1,8 +1,16 @@
 import type { SiteContent } from "@/content/types";
+import type { Locale } from "@/i18n/config";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { Reveal } from "@/components/ui/Reveal";
+import { ArrowIcon } from "@/components/ui/icons";
 
-export function Projects({ content }: { content: SiteContent }) {
+export function Projects({
+  content,
+  locale,
+}: {
+  content: SiteContent;
+  locale: Locale;
+}) {
   const { projects } = content;
 
   return (
@@ -38,13 +46,28 @@ export function Projects({ content }: { content: SiteContent }) {
                     </li>
                   ))}
                 </ul>
+                <a
+                  href={`/${locale}/casos#${project.id}`}
+                  className="mt-5 inline-flex items-center gap-1.5 text-sm font-medium text-accent transition-colors hover:text-accent-strong"
+                >
+                  {projects.caseMore}
+                  <ArrowIcon className="h-3.5 w-3.5" />
+                </a>
               </div>
             </Reveal>
           ))}
         </div>
 
-        <Reveal delay={0.08}>
-          <p className="mt-8 text-sm text-muted/70">{projects.note}</p>
+        <Reveal delay={0.06}>
+          <div className="mt-10">
+            <a
+              href={`/${locale}/casos`}
+              className="inline-flex items-center gap-2 rounded-full border border-foreground/30 px-5 py-2.5 text-sm font-medium text-foreground transition-colors hover:border-accent/50 hover:bg-accent/15 hover:text-accent-strong"
+            >
+              {projects.viewAll}
+              <ArrowIcon className="h-4 w-4" />
+            </a>
+          </div>
         </Reveal>
       </div>
     </section>

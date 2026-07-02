@@ -8,6 +8,8 @@ export interface SkillGroup {
 }
 
 export interface ProjectCase {
+  /** Enlaza la tarjeta de la landing con su versión detallada (/casos#id). */
+  id: string;
   sector: string;
   title: string;
   description: string;
@@ -18,6 +20,35 @@ export interface EducationItem {
   name: string;
   org: string;
   detail?: string;
+}
+
+export interface CaseCapture {
+  /** Ruta bajo /public (p.ej. "/casos/descargas-01.png"). Vacío = hueco pendiente. */
+  src?: string;
+  caption: string;
+}
+
+export interface FeaturedCase {
+  /** Ancla de la URL (/casos#id). Igual en los tres idiomas. */
+  id: string;
+  sector: string;
+  title: string;
+  /** Párrafos: problema → solución → resultado. */
+  paragraphs: string[];
+  stack: string[];
+  captures: CaseCapture[];
+}
+
+export interface MiniCase {
+  sector: string;
+  title: string;
+  description: string;
+  stack: string[];
+}
+
+export interface CaseGroup {
+  name: string;
+  items: MiniCase[];
 }
 
 export interface SiteContent {
@@ -48,8 +79,28 @@ export interface SiteContent {
   projects: {
     title: string;
     intro: string;
-    note: string;
     cases: ProjectCase[];
+    /** Botón al final de la sección que lleva a /casos. */
+    viewAll: string;
+    /** Enlace "Ver más" de cada tarjeta hacia su detalle en /casos. */
+    caseMore: string;
+  };
+  cases: {
+    metaTitle: string;
+    metaDescription: string;
+    /** Etiqueta del enlace a la home en el breadcrumb. */
+    breadcrumbHome: string;
+    eyebrow: string;
+    title: string;
+    intro: string;
+    othersTitle: string;
+    /** Etiquetas accesibles de las flechas de las galerías. */
+    galleryPrev: string;
+    galleryNext: string;
+    /** Texto del hueco de captura pendiente. */
+    capturePending: string;
+    featured: FeaturedCase[];
+    groups: CaseGroup[];
   };
   education: {
     title: string;

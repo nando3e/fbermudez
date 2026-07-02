@@ -67,6 +67,14 @@ body {
   );
 }
 
+/* Scroll horizontal sin barra visible (galerías de capturas en /casos). */
+.no-scrollbar {
+  scrollbar-width: none;
+}
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
 /* Eyebrow en mono, como los rótulos de sección de Solutia. */
 .eyebrow {
   font-family: var(--font-mono), ui-monospace, monospace;

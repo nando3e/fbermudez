@@ -63,9 +63,9 @@ export const ca: SiteContent = {
   projects: {
     title: "Projectes",
     intro: "Casos reals en producció. Problema, solució i impacte.",
-    note: "Noms de client omesos per confidencialitat — referències disponibles si les necessites.",
     cases: [
       {
+        id: "descargas-camiones",
         sector: "Valorització de residus",
         title: "Agent IA per coordinar descàrregues de camions",
         description:
@@ -73,6 +73,7 @@ export const ca: SiteContent = {
         stack: ["Telegram", "Claude API", "n8n", "PostgreSQL"],
       },
       {
+        id: "reservas-whatsapp",
         sector: "Perruqueria",
         title: "Agent de reserves per WhatsApp",
         description:
@@ -80,6 +81,7 @@ export const ca: SiteContent = {
         stack: ["WhatsApp · Evolution API", "n8n", "Claude API"],
       },
       {
+        id: "pedidos-erp",
         sector: "Distribució ecològica",
         title: "Comandes per email directes a l'ERP",
         description:
@@ -87,11 +89,177 @@ export const ca: SiteContent = {
         stack: ["LLM", "Odoo · JSON-RPC", "Node.js"],
       },
       {
+        id: "dispatch-recogidas",
         sector: "Gestió de residus",
         title: "Sistema de dispatch de recollides",
         description:
           "Tauler Kanban per a l'oficina, PWA per a conductors, bústia de fotos per Telegram i avisos per WhatsApp. Tota l'operació de recollida coordinada en un sol flux.",
         stack: ["PWA", "React", "Telegram", "WhatsApp", "Node.js"],
+      },
+    ],
+    viewAll: "Veure tots els casos",
+    caseMore: "Veure més",
+  },
+  cases: {
+    metaTitle: "Casos — Fernando Bermúdez",
+    metaDescription:
+      "Dotze casos reals d'automatització, agents d'IA i integracions en producció: agents conversacionals, pipelines de dades i sistemes a mida.",
+    breadcrumbHome: "Inici",
+    eyebrow: "Casos",
+    title: "Tots els casos",
+    intro:
+      "Sistemes reals, construïts a mida i en producció. Els quatre primers amb més detall i captures; la resta, en versió breu.",
+    othersTitle: "Més casos",
+    galleryPrev: "Captura anterior",
+    galleryNext: "Captura següent",
+    capturePending: "Captura en preparació",
+    featured: [
+      {
+        id: "descargas-camiones",
+        sector: "Valorització de residus",
+        title: "Agent IA per coordinar descàrregues de camions",
+        paragraphs: [
+          "Els camions arribaven a planta sense ordre previ: cues a la bàscula, trucades creuades i una operativa que depenia de la memòria de qui fos a recepció aquell dia.",
+          "Un agent a Telegram coordina ara les descàrregues: els transportistes anuncien l'arribada des de la cabina, l'agent els assigna torn segons el material i el moll disponible, i la planta veu la cua en temps real.",
+          "El resultat: menys esperes a la bàscula, zero trucades de coordinació i un registre complet de cada descàrrega sense que ningú apunti res a mà.",
+        ],
+        stack: ["Telegram", "Claude API", "n8n", "PostgreSQL"],
+        captures: [
+          { caption: "Un transportista anuncia l'arribada des de la cabina" },
+          { caption: "L'agent assigna torn i hora estimada de descàrrega" },
+          { caption: "La cua de camions en temps real, vista des de planta" },
+          { caption: "Panell d'administració de torns i molls" },
+          { caption: "Avís automàtic al següent camió de la cua" },
+          { caption: "Històric de descàrregues amb material i tonatge" },
+        ],
+      },
+      {
+        id: "reservas-whatsapp",
+        sector: "Perruqueria",
+        title: "Agent de reserves per WhatsApp",
+        paragraphs: [
+          "El telèfon del saló sonava mentre s'atenia clients: cites apuntades a mitges, canvis que no es registraven i forats perduts.",
+          "Un agent de WhatsApp gestiona l'agenda amb disponibilitat real: reserva, canvia i cancel·la cites conversant amb naturalitat. Inclou la part difícil — zones horàries, canvis d'hora (DST) i casos límit de cap de setmana que trencaven les cites.",
+          "El saló va deixar de perdre reserves fora d'horari i l'agenda es manté coherent sense intervenció manual.",
+        ],
+        stack: ["WhatsApp · Evolution API", "n8n", "Claude API"],
+        captures: [
+          { caption: "Una reserva completa, de salutació a confirmació" },
+          { caption: "Canvi d'una cita existent en dos missatges" },
+          { caption: "Cancel·lació amb el forat alliberat al moment" },
+          { caption: "L'agenda del saló, sincronitzada" },
+          { caption: "Cas límit resolt: reserva sobre un canvi d'hora (DST)" },
+        ],
+      },
+      {
+        id: "pedidos-erp",
+        sector: "Distribució ecològica",
+        title: "Comandes per email directes a l'ERP",
+        paragraphs: [
+          "Cada matí, una persona transcrivia a mà les comandes que arribaven per correu: referències, quantitats, variants. Lent i amb errors que acabaven al repartiment.",
+          "Un pipeline llegeix els correus entrants, un LLM interpreta cada comanda i la valida contra el catàleg, i la comanda es crea a Odoo via JSON-RPC. Les referències dubtoses es marquen per revisar en lloc d'endevinar-se.",
+          "De la safata d'entrada a la comanda registrada sense mans, amb les excepcions assenyalades perquè una persona decideixi només on aporta.",
+        ],
+        stack: ["LLM", "Odoo · JSON-RPC", "Node.js"],
+        captures: [
+          { caption: "L'email de comanda original, tal com arriba" },
+          { caption: "La interpretació del LLM: línies, referències i quantitats" },
+          { caption: "La comanda creada automàticament a Odoo" },
+          { caption: "Una referència dubtosa marcada per a revisió humana" },
+          { caption: "Registre d'activitat del pipeline" },
+        ],
+      },
+      {
+        id: "dispatch-recogidas",
+        sector: "Gestió de residus",
+        title: "Sistema de dispatch de recollides",
+        paragraphs: [
+          "L'operació de recollides es coordinava per trucades i grups de WhatsApp: ningú tenia la foto completa i els justificants arribaven tard o no arribaven.",
+          "Un sol flux ho ordena tot: tauler Kanban per a l'oficina, PWA per als conductors amb la ruta del dia, bústia de fotos per Telegram des del camió i avisos automàtics per WhatsApp al client.",
+          "Cada recollida queda documentada al moment, i l'oficina veu l'estat de tota la flota d'un cop d'ull.",
+        ],
+        stack: ["PWA", "React", "Telegram", "WhatsApp", "Node.js"],
+        captures: [
+          { caption: "El tauler Kanban de l'oficina" },
+          { caption: "La PWA del conductor amb la ruta del dia" },
+          { caption: "Fotos del servei enviades per Telegram des del camió" },
+          { caption: "Avís de WhatsApp al client amb la recollida confirmada" },
+          { caption: "Detall d'una recollida completada i documentada" },
+          { caption: "Vista general de l'operació en temps real" },
+        ],
+      },
+    ],
+    groups: [
+      {
+        name: "Agents conversacionals",
+        items: [
+          {
+            sector: "Restauració",
+            title: "Atenció de WhatsApp fora d'horari",
+            description:
+              "Relay que atén els missatges quan el negoci és tancat: respon dubtes freqüents i deixa les reserves anotades per confirmar al matí.",
+            stack: ["WhatsApp", "n8n", "Claude API"],
+          },
+          {
+            sector: "Media",
+            title: "Agent conversacional per a un podcast",
+            description:
+              "Conversa amb l'audiència guiat per una màquina d'estats: recomana episodis, recull suggeriments i manté el fil entre visites.",
+            stack: ["Telegram", "FSM", "LLM"],
+          },
+          {
+            sector: "Serveis",
+            title: "Agent de veu per a cites",
+            description:
+              "Recepcionista de veu que atén la trucada, consulta disponibilitat real i deixa la cita confirmada abans de penjar.",
+            stack: ["Vapi", "ElevenLabs", "n8n"],
+          },
+        ],
+      },
+      {
+        name: "Integracions i dades",
+        items: [
+          {
+            sector: "Alimentació",
+            title: "Traçabilitat de producte carni",
+            description:
+              "D'albarans en PDF i Excel a codis de traçabilitat generats i validats automàticament, sense transcripció manual.",
+            stack: ["PDF/Excel", "LLM", "Node.js"],
+          },
+          {
+            sector: "Serveis industrials",
+            title: "Plataforma d'incidències multi-actor",
+            description:
+              "Registre i seguiment d'incidències entre client, tècnics i oficina, amb estats, responsables i avisos automàtics.",
+            stack: ["React", "Node.js", "PostgreSQL"],
+          },
+          {
+            sector: "Immobiliari",
+            title: "Informes automàtics de mercat",
+            description:
+              "Agent que rastreja portals, creua les dades amb els criteris del client i envia un informe periòdic amb oportunitats filtrades.",
+            stack: ["Scraping", "LLM", "n8n"],
+          },
+        ],
+      },
+      {
+        name: "Web i backoffice",
+        items: [
+          {
+            sector: "Consultoria",
+            title: "Web corporativa multiidioma",
+            description:
+              "Lloc corporatiu en tres idiomes amb SEO tècnic, rendiment cuidat i desplegament autoallotjat en infraestructura pròpia.",
+            stack: ["Next.js", "Tailwind", "Docker"],
+          },
+          {
+            sector: "Indústria",
+            title: "Assistent RAG sobre documentació interna",
+            description:
+              "Xat intern que respon citant les instruccions de treball i fitxes tècniques de l'empresa com a única font.",
+            stack: ["RAG", "Base vectorial", "Claude API"],
+          },
+        ],
       },
     ],
   },

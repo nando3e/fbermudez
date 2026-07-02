@@ -58,7 +58,7 @@ export default async function Home({
       <FlowRail sections={railSections} />
       <Intro content={content} />
       <Skills content={content} />
-      <Projects content={content} />
+      <Projects content={content} locale={locale as Locale} />
       <Education content={content} />
       <Assistant content={content} />
       <Contact content={content} />
