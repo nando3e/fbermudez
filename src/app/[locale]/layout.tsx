@@ -7,6 +7,7 @@ import "../globals.css";
 import { locales, isLocale, type Locale } from "@/i18n/config";
 import { getContent } from "@/content";
 import { site } from "@/content/site";
+import { themeStyle } from "@/lib/theme";
 import { Backdrop } from "@/components/layout/Backdrop";
 import { SmoothScroll } from "@/components/scroll/SmoothScroll";
 import { Header } from "@/components/layout/Header";
@@ -70,6 +71,7 @@ export default async function LocaleLayout({
     <html
       lang={typedLocale}
       className={`${GeistSans.variable} ${GeistMono.variable}`}
+      style={themeStyle}
       suppressHydrationWarning
     >
       <body className="min-h-svh">

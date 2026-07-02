@@ -1,6 +1,8 @@
 @import "tailwindcss";
 
-/* ---- Paleta oscura, sobria y editorial ---- */
+/* ---- Paleta ----
+   Los valores reales los inyecta src/lib/theme.ts (según VIEW_MODE) como
+   estilo inline de <html>. Este bloque es solo el fallback (= DARK1). */
 :root {
   --background: #06070b;
   --foreground: #ededf2;
@@ -12,6 +14,7 @@
   --card-hover: rgba(255, 255, 255, 0.045);
   --accent: #8b9cff;
   --accent-strong: #b3c0ff;
+  --glow-strength: 12%;
 }
 
 @theme inline {
@@ -29,9 +32,7 @@
   --font-mono: var(--font-geist-mono);
 }
 
-html {
-  color-scheme: dark;
-}
+/* color-scheme lo fija theme.ts inline en <html> según el modo. */
 
 body {
   background: var(--background);
@@ -45,8 +46,8 @@ body {
 .backdrop-glow {
   background: radial-gradient(
     80% 60% at 50% -5%,
-    rgba(139, 156, 255, 0.12) 0%,
-    rgba(139, 156, 255, 0) 65%
+    color-mix(in srgb, var(--accent) var(--glow-strength), transparent) 0%,
+    color-mix(in srgb, var(--accent) 0%, transparent) 65%
   );
 }
 
@@ -75,7 +76,7 @@ body {
   color: var(--accent);
 }
 
-/* Foco accesible y visible sobre fondo oscuro. */
+/* Foco accesible y visible sobre el fondo del tema. */
 :focus-visible {
   outline: 2px solid var(--accent);
   outline-offset: 3px;
@@ -84,7 +85,7 @@ body {
 
 ::selection {
   background: color-mix(in srgb, var(--accent) 35%, transparent);
-  color: #fff;
+  color: var(--foreground);
 }
 
 @media (prefers-reduced-motion: reduce) {

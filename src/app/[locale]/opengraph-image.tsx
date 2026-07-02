@@ -1,6 +1,7 @@
 import { ImageResponse } from "next/og";
 import { isLocale, defaultLocale, type Locale } from "@/i18n/config";
 import { getContent } from "@/content";
+import { theme } from "@/lib/theme";
 
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
@@ -26,24 +27,23 @@ export default async function OgImage({
           flexDirection: "column",
           justifyContent: "space-between",
           padding: "80px",
-          background:
-            "radial-gradient(120% 90% at 75% 10%, #12132b 0%, #050507 55%)",
-          color: "#ededf2",
+          background: `radial-gradient(120% 90% at 75% 10%, ${theme.ogFrom} 0%, ${theme.ogTo} 55%)`,
+          color: theme.foreground,
           fontFamily: "sans-serif",
         }}
       >
-        <div style={{ display: "flex", color: "#8b9cff", fontSize: 30 }}>
+        <div style={{ display: "flex", color: theme.accent, fontSize: 30 }}>
           fbermudez.dev
         </div>
         <div style={{ display: "flex", flexDirection: "column", gap: 20 }}>
           <div style={{ fontSize: 76, fontWeight: 700, letterSpacing: "-0.03em" }}>
             Fernando Bermúdez
           </div>
-          <div style={{ fontSize: 40, color: "#c4c4d0", maxWidth: 900 }}>
+          <div style={{ fontSize: 40, color: theme.mutedStrong, maxWidth: 900 }}>
             {content.intro.role.replace(/\s*\|\s*/g, " · ")}
           </div>
         </div>
-        <div style={{ display: "flex", fontSize: 26, color: "#9a9aa8" }}>
+        <div style={{ display: "flex", fontSize: 26, color: theme.muted }}>
           Socio tecnológico en Solutia · Olot, La Garrotxa
         </div>
       </div>
