@@ -31,12 +31,12 @@ export const en: SiteContent = {
       {
         name: "Automation & AI",
         description:
-          "I design and build automations and AI-powered systems using Claude, OpenAI, custom code, n8n and MCP: systems that understand natural language, decide and act over your own information.",
+          "I design and build automations and AI-powered systems, using custom code, MCPs, REST APIs and n8n among others, to deliver solutions that understand and act on your own information.",
       },
       {
         name: "Messaging & integrations",
         description:
-          "I connect the channels where business happens —WhatsApp, Instagram, Telegram— with Chatwoot and other CRMs, and add voice through Vapi and ElevenLabs. Customers write or call and the system responds.",
+          "I connect the channels where business happens —WhatsApp, Instagram, Telegram, email— with Chatwoot and other CRMs, and add voice through Vapi or ElevenLabs. The customer asks, the system answers.",
       },
       {
         name: "Backend & frontend",
@@ -56,7 +56,7 @@ export const en: SiteContent = {
       {
         name: "Methodology",
         description:
-          "Phases of analysis, design, development, testing and documentation. From the problem to the specs, and from there to solutions that work.",
+          "Analysis, design, programming, testing and delivery with documentation. From the problem to the specifications, and from the specifications to a solution that works.",
       },
     ],
   },
@@ -296,7 +296,7 @@ export const en: SiteContent = {
   assistant: {
     eyebrow: "Live demo",
     question: "Want to talk to my assistant?",
-    note: "It's a real AI agent, like the ones I build, that will answer you on WhatsApp right away. Ask it anything about me!",
+    note: "A conversational AI agent that will answer you on WhatsApp right away. Ask it anything about me!",
     cta: "Open WhatsApp",
   },
   contact: {

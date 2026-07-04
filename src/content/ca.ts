@@ -31,17 +31,17 @@ export const ca: SiteContent = {
       {
         name: "Automatització & IA",
         description:
-          "Dissenyo i construeixo automatitzacions i sistemes potenciats amb IA, utilitzant Claude, OpenAI, codi propi, n8n i MCP: sistemes que entenen llenguatge natural, decideixen i actuen sobre la teva pròpia informació.",
+          "Dissenyo i construeixo automatitzacions i sistemes potenciats amb IA, fent servir codi propi, MCPs, API Rest i n8n entre d'altres per aconseguir solucions que entenen i actuen sobre la teva pròpia informació.",
       },
       {
         name: "Missatgeria & integracions",
         description:
-          "Connecto els canals per on passa el negoci —WhatsApp, Instagram, Telegram— amb Chatwoot i altres CRM, i hi afegeixo veu mitjançant Vapi i ElevenLabs. El client escriu o truca i el sistema respon.",
+          "Connecto els canals per on passa el negoci —WhatsApp, Instagram, Telegram, mail— amb Chatwoot i altres CRM, a més d'afegir-hi veu mitjançant Vapi o ElevenLabs. El client pregunta, el sistema respon.",
       },
       {
         name: "Backend & frontend",
         description:
-          "Desenvolupament en entorn servidor i entorn client per construir aplicacions integrals, amb accés a dades, dashboards, vistes personalitzades i totalment responsive per a mòbils.",
+          "Desenvolupament d'entorn servidor i entorn client per construir aplicacions integrals, amb accés a dades, dashboards, vistes personalitzades i totalment responsive per a mòbils.",
       },
       {
         name: "Dades & seguretat",
@@ -56,7 +56,7 @@ export const ca: SiteContent = {
       {
         name: "Metodologia",
         description:
-          "Fases d'anàlisi, disseny, programació, proves i documentació. Del problema a les especificacions, i d'aquí a solucions que funcionin.",
+          "Anàlisi, disseny, programació, proves i lliurament amb documentació. Del problema a les especificacions, i de les especificacions a la solució que funciona.",
       },
     ],
   },
@@ -296,7 +296,7 @@ export const ca: SiteContent = {
   assistant: {
     eyebrow: "Demo en viu",
     question: "Vols parlar amb el meu assistent?",
-    note: "És un agent IA real, com els que construeixo, que t'atendrà per WhatsApp a l'instant. Pregunta-li el que vulguis sobre mi!",
+    note: "Un agent IA conversacional que t'atendrà per WhatsApp a l'instant. Pregunta-li el que vulguis sobre mi!",
     cta: "Obrir WhatsApp",
   },
   contact: {
