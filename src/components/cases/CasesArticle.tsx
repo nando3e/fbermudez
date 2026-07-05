@@ -105,33 +105,24 @@ export function CasesArticle({
 
           <ul className="mt-8 flex flex-col divide-y divide-border border-y border-border">
             {cases.others.map((item, i) => (
-              <Reveal
-                key={item.title}
-                as="li"
-                delay={i * 0.04}
-                className="flex flex-col gap-3 py-7 sm:flex-row sm:items-start sm:justify-between sm:gap-10"
-              >
-                <div className="min-w-0 sm:max-w-2xl">
-                  <h3 className="text-base font-semibold tracking-tight text-foreground">
-                    {item.title}
-                  </h3>
-                  <p className="mt-2 text-sm leading-relaxed text-muted">
-                    {item.description}
-                  </p>
-                  <ul className="mt-4 flex flex-wrap gap-2">
-                    {item.stack.map((tech) => (
-                      <li
-                        key={tech}
-                        className="rounded-md border border-border px-2 py-0.5 font-mono text-[11px] text-muted-strong"
-                      >
-                        {tech}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-                <span className="shrink-0 font-mono text-xs uppercase tracking-wider text-accent sm:pt-1">
-                  {item.category}
-                </span>
+              <Reveal key={item.title} as="li" delay={i * 0.04} className="py-7">
+                <span className="eyebrow">{item.category}</span>
+                <h3 className="mt-2.5 text-base font-semibold tracking-tight text-foreground">
+                  {item.title}
+                </h3>
+                <p className="mt-2 max-w-2xl text-sm leading-relaxed text-muted">
+                  {item.description}
+                </p>
+                <ul className="mt-4 flex flex-wrap gap-2">
+                  {item.stack.map((tech) => (
+                    <li
+                      key={tech}
+                      className="rounded-md border border-border px-2 py-0.5 font-mono text-[11px] text-muted-strong"
+                    >
+                      {tech}
+                    </li>
+                  ))}
+                </ul>
               </Reveal>
             ))}
           </ul>
