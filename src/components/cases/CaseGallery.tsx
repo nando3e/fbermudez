@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import Image from "next/image";
 import type { CaseCapture } from "@/content/types";
 import { ArrowIcon, CloseIcon } from "@/components/ui/icons";
@@ -31,6 +31,25 @@ export function CaseGallery({
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
   const reduced = useReducedMotion();
 
+  // Índices de capturas con imagen real: el lightbox solo navega entre ellas.
+  const srcIndices = useMemo(
+    () => captures.map((c, i) => (c.src ? i : -1)).filter((i) => i >= 0),
+    [captures],
+  );
+  const goLightbox = useCallback(
+    (dir: number) =>
+      setLightboxIndex((cur) => {
+        if (cur === null) return cur;
+        const pos = srcIndices.indexOf(cur);
+        const next = pos + dir;
+        return next >= 0 && next < srcIndices.length ? srcIndices[next] : cur;
+      }),
+    [srcIndices],
+  );
+  // Distinguir swipe de tap para no cerrar el lightbox al deslizar.
+  const touchStartX = useRef<number | null>(null);
+  const swiped = useRef(false);
+
   const clamp = (i: number) => Math.max(0, Math.min(captures.length - 1, i));
 
   // El índice se deriva del scroll real: así swipe, flechas y bolitas
@@ -59,6 +78,8 @@ export function CaseGallery({
     if (lightboxIndex === null) return;
     const onKeyDown = (e: KeyboardEvent) => {
       if (e.key === "Escape") setLightboxIndex(null);
+      else if (e.key === "ArrowRight") goLightbox(1);
+      else if (e.key === "ArrowLeft") goLightbox(-1);
     };
     window.addEventListener("keydown", onKeyDown);
     const html = document.documentElement;
@@ -68,13 +89,17 @@ export function CaseGallery({
       window.removeEventListener("keydown", onKeyDown);
       html.style.overflow = previousOverflow;
     };
-  }, [lightboxIndex]);
+  }, [lightboxIndex, goLightbox]);
 
   const lightboxCapture =
     lightboxIndex === null ? null : captures[lightboxIndex];
+  const lightboxPos =
+    lightboxIndex === null ? -1 : srcIndices.indexOf(lightboxIndex);
 
   const arrowClasses =
     "absolute top-1/2 hidden h-9 w-9 -translate-y-1/2 items-center justify-center rounded-full border border-border bg-background/70 text-muted backdrop-blur transition-colors hover:border-accent/50 hover:text-accent disabled:pointer-events-none disabled:opacity-30 md:flex";
+  const lightboxArrow =
+    "absolute top-1/2 z-10 flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full border border-border bg-background/70 text-muted backdrop-blur transition-colors hover:border-accent/50 hover:text-accent disabled:pointer-events-none disabled:opacity-30";
 
   return (
     <div className="mt-8">
@@ -162,7 +187,30 @@ export function CaseGallery({
           aria-modal="true"
           aria-label={lightboxCapture.caption}
           data-lenis-prevent
-          onClick={() => setLightboxIndex(null)}
+          onClick={() => {
+            if (swiped.current) {
+              swiped.current = false;
+              return;
+            }
+            setLightboxIndex(null);
+          }}
+          onTouchStart={(e) => {
+            touchStartX.current = e.touches[0].clientX;
+            swiped.current = false;
+          }}
+          onTouchMove={(e) => {
+            if (
+              touchStartX.current !== null &&
+              Math.abs(e.touches[0].clientX - touchStartX.current) > 10
+            )
+              swiped.current = true;
+          }}
+          onTouchEnd={(e) => {
+            if (touchStartX.current === null) return;
+            const dx = e.changedTouches[0].clientX - touchStartX.current;
+            touchStartX.current = null;
+            if (Math.abs(dx) > 50) goLightbox(dx < 0 ? 1 : -1);
+          }}
           className="fixed inset-0 z-[90] flex flex-col bg-background/90 backdrop-blur-xl"
         >
           <div className="relative flex-1 cursor-zoom-out p-4 sm:p-10">
@@ -174,12 +222,53 @@ export function CaseGallery({
               className="object-contain"
             />
           </div>
-          <p className="px-6 pb-6 text-center text-[13px] leading-snug text-muted">
-            {lightboxCapture.caption}
-          </p>
+
+          {srcIndices.length > 1 && (
+            <>
+              <button
+                type="button"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  goLightbox(-1);
+                }}
+                disabled={lightboxPos <= 0}
+                aria-label={prevLabel}
+                className={`${lightboxArrow} left-3 sm:left-5`}
+              >
+                <ArrowIcon className="h-5 w-5 rotate-180" />
+              </button>
+              <button
+                type="button"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  goLightbox(1);
+                }}
+                disabled={lightboxPos >= srcIndices.length - 1}
+                aria-label={nextLabel}
+                className={`${lightboxArrow} right-3 sm:right-5`}
+              >
+                <ArrowIcon className="h-5 w-5" />
+              </button>
+            </>
+          )}
+
+          <div className="px-6 pb-6 text-center">
+            {srcIndices.length > 1 && (
+              <span className="mb-1 block font-mono text-[11px] text-muted/60">
+                {lightboxPos + 1} / {srcIndices.length}
+              </span>
+            )}
+            <p className="text-[13px] leading-snug text-muted">
+              {lightboxCapture.caption}
+            </p>
+          </div>
+
           <button
             type="button"
-            onClick={() => setLightboxIndex(null)}
+            onClick={(e) => {
+              e.stopPropagation();
+              setLightboxIndex(null);
+            }}
             aria-label={closeLabel}
             className="absolute right-4 top-4 flex h-10 w-10 items-center justify-center rounded-full border border-border bg-background/70 text-muted backdrop-blur transition-colors hover:border-accent/50 hover:text-accent"
           >
