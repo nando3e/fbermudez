@@ -29,6 +29,9 @@ export function CaseGallery({
   const scrollerRef = useRef<HTMLUListElement>(null);
   const [index, setIndex] = useState(0);
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
+  // Zoom del lightbox: escala + desplazamiento (pan) cuando la imagen se amplía.
+  const [zoom, setZoom] = useState({ scale: 1, x: 0, y: 0 });
+  const [gesturing, setGesturing] = useState(false);
   const reduced = useReducedMotion();
 
   // Índices de capturas con imagen real: el lightbox solo navega entre ellas.
@@ -37,18 +40,46 @@ export function CaseGallery({
     [captures],
   );
   const goLightbox = useCallback(
-    (dir: number) =>
+    (dir: number) => {
+      setZoom({ scale: 1, x: 0, y: 0 });
       setLightboxIndex((cur) => {
         if (cur === null) return cur;
         const pos = srcIndices.indexOf(cur);
         const next = pos + dir;
         return next >= 0 && next < srcIndices.length ? srcIndices[next] : cur;
-      }),
+      });
+    },
     [srcIndices],
   );
-  // Distinguir swipe de tap para no cerrar el lightbox al deslizar.
-  const touchStartX = useRef<number | null>(null);
-  const swiped = useRef(false);
+  const imgBoxRef = useRef<HTMLDivElement>(null);
+  const pinchRef = useRef<{ dist: number; scale: number } | null>(null);
+  const panRef = useRef<{
+    x: number;
+    y: number;
+    tx: number;
+    ty: number;
+    startX: number;
+    moved: boolean;
+  } | null>(null);
+  const lastTapRef = useRef(0);
+  const pointerWasTouch = useRef(false);
+
+  // Limita el pan para que la imagen ampliada no se salga de su marco.
+  const clampZoom = (z: { scale: number; x: number; y: number }) => {
+    const rect = imgBoxRef.current?.getBoundingClientRect();
+    if (!rect) return z;
+    const maxX = (rect.width * (z.scale - 1)) / 2;
+    const maxY = (rect.height * (z.scale - 1)) / 2;
+    return {
+      scale: z.scale,
+      x: Math.min(maxX, Math.max(-maxX, z.x)),
+      y: Math.min(maxY, Math.max(-maxY, z.y)),
+    };
+  };
+  const dist2 = (
+    a: { clientX: number; clientY: number },
+    b: { clientX: number; clientY: number },
+  ) => Math.hypot(a.clientX - b.clientX, a.clientY - b.clientY);
 
   const clamp = (i: number) => Math.max(0, Math.min(captures.length - 1, i));
 
@@ -114,7 +145,10 @@ export function CaseGallery({
               {capture.src ? (
                 <button
                   type="button"
-                  onClick={() => setLightboxIndex(i)}
+                  onClick={() => {
+                    setZoom({ scale: 1, x: 0, y: 0 });
+                    setLightboxIndex(i);
+                  }}
                   aria-label={capture.caption}
                   className="relative block aspect-[16/10] w-full cursor-zoom-in overflow-hidden rounded-xl border border-border bg-card"
                 >
@@ -187,40 +221,106 @@ export function CaseGallery({
           aria-modal="true"
           aria-label={lightboxCapture.caption}
           data-lenis-prevent
-          onClick={() => {
-            if (swiped.current) {
-              swiped.current = false;
-              return;
-            }
-            setLightboxIndex(null);
-          }}
-          onTouchStart={(e) => {
-            touchStartX.current = e.touches[0].clientX;
-            swiped.current = false;
-          }}
-          onTouchMove={(e) => {
-            if (
-              touchStartX.current !== null &&
-              Math.abs(e.touches[0].clientX - touchStartX.current) > 10
-            )
-              swiped.current = true;
-          }}
-          onTouchEnd={(e) => {
-            if (touchStartX.current === null) return;
-            const dx = e.changedTouches[0].clientX - touchStartX.current;
-            touchStartX.current = null;
-            if (Math.abs(dx) > 50) goLightbox(dx < 0 ? 1 : -1);
-          }}
+          onClick={() => setLightboxIndex(null)}
           className="fixed inset-0 z-[90] flex flex-col bg-background/90 backdrop-blur-xl"
         >
-          <div className="relative flex-1 cursor-zoom-out p-4 sm:p-10">
-            <Image
-              src={lightboxCapture.src}
-              alt={lightboxCapture.caption}
-              fill
-              sizes="100vw"
-              className="object-contain"
-            />
+          <div
+            ref={imgBoxRef}
+            className="relative flex-1 cursor-zoom-out touch-none select-none overflow-hidden p-4 sm:p-10"
+            onClick={(e) => {
+              // En táctil, tocar la imagen no cierra (deja sitio al doble tap).
+              if (pointerWasTouch.current) {
+                pointerWasTouch.current = false;
+                e.stopPropagation();
+              }
+            }}
+            onTouchStart={(e) => {
+              pointerWasTouch.current = true;
+              setGesturing(true);
+              if (e.touches.length === 2) {
+                pinchRef.current = {
+                  dist: dist2(e.touches[0], e.touches[1]),
+                  scale: zoom.scale,
+                };
+                panRef.current = null;
+              } else {
+                const t = e.touches[0];
+                panRef.current = {
+                  x: t.clientX,
+                  y: t.clientY,
+                  tx: zoom.x,
+                  ty: zoom.y,
+                  startX: t.clientX,
+                  moved: false,
+                };
+              }
+            }}
+            onTouchMove={(e) => {
+              if (pinchRef.current && e.touches.length === 2) {
+                const d = dist2(e.touches[0], e.touches[1]);
+                const scale = Math.min(
+                  4,
+                  Math.max(1, (pinchRef.current.scale * d) / pinchRef.current.dist),
+                );
+                setZoom((z) => clampZoom({ ...z, scale }));
+              } else if (panRef.current && e.touches.length === 1) {
+                const pan = panRef.current;
+                const t = e.touches[0];
+                const dx = t.clientX - pan.x;
+                const dy = t.clientY - pan.y;
+                if (Math.abs(t.clientX - pan.startX) > 10) pan.moved = true;
+                // Ampliada: el dedo hace pan; en tamaño normal no mueve la imagen.
+                if (zoom.scale > 1) {
+                  setZoom((z) =>
+                    clampZoom({ scale: z.scale, x: pan.tx + dx, y: pan.ty + dy }),
+                  );
+                }
+              }
+            }}
+            onTouchEnd={(e) => {
+              if (e.touches.length < 2) pinchRef.current = null;
+              if (e.touches.length > 0) return;
+              setGesturing(false);
+              const pan = panRef.current;
+              panRef.current = null;
+              if (!pan) return;
+              const dx = e.changedTouches[0].clientX - pan.startX;
+              if (pan.moved) {
+                // Deslizar cambia de imagen solo en tamaño normal.
+                if (zoom.scale === 1 && Math.abs(dx) > 50)
+                  goLightbox(dx < 0 ? 1 : -1);
+                return;
+              }
+              // Toque sin movimiento: detectar doble tap.
+              const now = Date.now();
+              if (now - lastTapRef.current < 300) {
+                lastTapRef.current = 0;
+                setZoom((z) =>
+                  z.scale > 1
+                    ? { scale: 1, x: 0, y: 0 }
+                    : { scale: 2, x: 0, y: 0 },
+                );
+              } else {
+                lastTapRef.current = now;
+              }
+            }}
+          >
+            <div
+              className="relative h-full w-full"
+              style={{
+                transform: `translate(${zoom.x}px, ${zoom.y}px) scale(${zoom.scale})`,
+                transition: gesturing ? "none" : "transform 0.2s ease",
+              }}
+            >
+              <Image
+                src={lightboxCapture.src}
+                alt={lightboxCapture.caption}
+                fill
+                sizes="100vw"
+                draggable={false}
+                className="object-contain"
+              />
+            </div>
           </div>
 
           {srcIndices.length > 1 && (
