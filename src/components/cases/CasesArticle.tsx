@@ -2,6 +2,7 @@ import type { SiteContent } from "@/content/types";
 import type { Locale } from "@/i18n/config";
 import { Reveal } from "@/components/ui/Reveal";
 import { CaseGallery } from "./CaseGallery";
+import { ArrowIcon } from "@/components/ui/icons";
 
 /**
  * Página /casos: los destacados desarrollados (texto + galería de capturas),
@@ -102,41 +103,51 @@ export function CasesArticle({
             </h2>
           </Reveal>
 
-          {cases.groups.map((group) => (
-            <div key={group.name} className="mt-10">
-              <Reveal>
-                <span className="eyebrow">{group.name}</span>
+          <ul className="mt-8 flex flex-col divide-y divide-border border-y border-border">
+            {cases.others.map((item, i) => (
+              <Reveal
+                key={item.title}
+                as="li"
+                delay={i * 0.04}
+                className="flex flex-col gap-3 py-7 sm:flex-row sm:items-start sm:justify-between sm:gap-10"
+              >
+                <div className="min-w-0 sm:max-w-2xl">
+                  <h3 className="text-base font-semibold tracking-tight text-foreground">
+                    {item.title}
+                  </h3>
+                  <p className="mt-2 text-sm leading-relaxed text-muted">
+                    {item.description}
+                  </p>
+                  <ul className="mt-4 flex flex-wrap gap-2">
+                    {item.stack.map((tech) => (
+                      <li
+                        key={tech}
+                        className="rounded-md border border-border px-2 py-0.5 font-mono text-[11px] text-muted-strong"
+                      >
+                        {tech}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+                <span className="shrink-0 font-mono text-xs uppercase tracking-wider text-accent sm:pt-1">
+                  {item.category}
+                </span>
               </Reveal>
-              <div className="mt-5 grid gap-4 sm:grid-cols-2">
-                {group.items.map((item) => (
-                  <Reveal key={item.title} delay={0.04} className="h-full">
-                    <div className="h-full rounded-2xl border border-border bg-card p-5 transition-colors hover:bg-card-hover sm:p-6">
-                      <span className="font-mono text-[11px] uppercase tracking-[0.14em] text-muted/60">
-                        {item.sector}
-                      </span>
-                      <h3 className="mt-2.5 text-base font-semibold tracking-tight">
-                        {item.title}
-                      </h3>
-                      <p className="mt-2 text-sm leading-relaxed text-muted">
-                        {item.description}
-                      </p>
-                      <ul className="mt-4 flex flex-wrap gap-2">
-                        {item.stack.map((tech) => (
-                          <li
-                            key={tech}
-                            className="rounded-md border border-border px-2 py-0.5 font-mono text-[11px] text-muted-strong"
-                          >
-                            {tech}
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                  </Reveal>
-                ))}
-              </div>
-            </div>
-          ))}
+            ))}
+          </ul>
         </section>
+
+        <Reveal>
+          <div className="mt-16 border-t border-border pt-10">
+            <a
+              href={`/${locale}`}
+              className="inline-flex items-center gap-2 text-sm font-medium text-accent transition-colors hover:text-accent-strong"
+            >
+              <ArrowIcon className="h-4 w-4 rotate-180" />
+              {cases.backHome}
+            </a>
+          </div>
+        </Reveal>
       </div>
     </div>
   );

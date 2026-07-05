@@ -65,36 +65,20 @@ export const en: SiteContent = {
     intro: "Real cases in production. Problem, solution, impact.",
     cases: [
       {
-        id: "descargas-camiones",
-        sector: "Waste recovery",
-        title: "AI agent to coordinate truck unloading",
+        id: "fincas",
+        sector: "Property management",
+        title: "Community and property management",
         description:
-          "Trucks arrived with no order and the weighbridge was a bottleneck. A Telegram agent now coordinates unloading: hauliers announce their arrival, the agent assigns a slot and the plant sees the queue in real time.",
-        stack: ["Telegram", "Claude API", "n8n", "PostgreSQL"],
+          "Software for property managers with an AI agent on WhatsApp. Residents identify themselves by their unit, get answers to frequent questions about their community and report incidents; the system notifies the right people and coordinates providers until each one is closed.",
+        stack: ["WhatsApp", "Claude API", "React / Node.js", "Qdrant", "PostgreSQL"],
       },
       {
-        id: "reservas-whatsapp",
-        sector: "Hair salon",
-        title: "WhatsApp booking agent",
+        id: "logistica",
+        sector: "Agri-food industry",
+        title: "Silo unloading planner",
         description:
-          "Handles real availability, changes and cancellations. Includes the hard part: time zones, daylight-saving shifts (DST) and weekend edge cases that used to break appointments.",
-        stack: ["WhatsApp · Evolution API", "n8n", "Claude API"],
-      },
-      {
-        id: "pedidos-erp",
-        sector: "Organic distribution",
-        title: "Email orders straight into the ERP",
-        description:
-          "A pipeline reads orders arriving by email, an LLM parses them (SKUs, quantities, variants) and creates them in Odoo via JSON-RPC. From inbox to registered order, hands-off.",
-        stack: ["LLM", "Odoo · JSON-RPC", "Node.js"],
-      },
-      {
-        id: "dispatch-recogidas",
-        sector: "Waste management",
-        title: "Pickup dispatch system",
-        description:
-          "Kanban board for the office, a PWA for drivers, a photo inbox over Telegram and WhatsApp alerts. The whole pickup operation coordinated in a single flow.",
-        stack: ["PWA", "React", "Telegram", "WhatsApp", "Node.js"],
+          "A web app that plans a plant's truck intake in real time: it simulates the silo level, sequences unloadings and anticipates delays and stoppages. Drivers and staff talk to the system over Telegram and the plan recalculates itself.",
+        stack: ["React / Vite", "Recharts", "Node / Express", "PostgreSQL", "Telegram"],
       },
     ],
     viewAll: "See more projects",
@@ -103,164 +87,154 @@ export const en: SiteContent = {
   cases: {
     metaTitle: "Cases — Fernando Bermúdez",
     metaDescription:
-      "Twelve real cases of automation, AI agents and integrations in production: conversational agents, data pipelines and custom systems.",
+      "Real cases of automation, AI agents and integrations in production: conversational agents, data pipelines and custom systems.",
     breadcrumbHome: "Home",
     eyebrow: "Cases",
     title: "Cases in production",
     intro:
-      "Custom-built systems running in real businesses today. The first four in more detail with screenshots; the rest in short form.",
+      "Custom-built systems up and running today in companies across different sectors.",
     othersTitle: "More cases",
     galleryPrev: "Previous screenshot",
     galleryNext: "Next screenshot",
     capturePending: "Screenshot in preparation",
     lightboxClose: "Close",
+    backHome: "Back to home",
     featured: [
       {
-        id: "descargas-camiones",
-        sector: "Waste recovery",
-        title: "AI agent to coordinate truck unloading",
+        id: "fincas",
+        sector: "Property management",
+        title: "Community and property management",
         paragraphs: [
-          "Trucks arrived at the plant with no prior order: queues at the weighbridge, crossed phone calls and an operation that depended on the memory of whoever was at reception that day.",
-          "A Telegram agent now coordinates the unloading: drivers announce their arrival from the cab, the agent assigns them a slot based on material and available dock, and the plant sees the queue in real time.",
-          "The result: less waiting at the weighbridge, zero coordination calls and a complete record of every unloading without anyone writing anything down.",
+          "Managing communities means answering the same questions over and over and fielding reports over phone, email and scattered WhatsApp groups: a breakdown gets reported however it can, finding the right provider takes time, and once it's fixed it's hard to know what happened and who was told.",
+          "A community-management platform with an AI agent on WhatsApp as the entry point. Each resident identifies themselves with their unit's code, so the system knows who they are and they can only query and report about their own community. The manager uploads everything relevant to each community to a documents section, and the agent uses it to answer residents' frequent questions —rules, fees, contacts— citing the source.",
+          "When the report is an incident, the agent logs it in a structured form and alert rules, by urgency or keywords, decide who gets notified (residents, manager or providers) and through which channel. With provider management built in, the system opens a conversation with the providers for the required service tied to that community; when one confirms, everyone is told it's covered. Each incident can be edited and annotated, leaving a full trace of what happened until it's closed.",
+          "The manager stops chasing reports across scattered channels and repeating the same answers: residents write where they already write, get their questions resolved on the spot and every incident is documented and coordinated with the provider on its own. It works the same for residential communities, housing estates, industrial parks and commercial areas, whether they have a specific address or a scattered location.",
         ],
-        stack: ["Telegram", "Claude API", "n8n", "PostgreSQL"],
+        stack: ["WhatsApp", "Claude API", "React / Node.js", "Qdrant", "PostgreSQL"],
         captures: [
-          { caption: "A driver announces their arrival from the cab" },
-          { caption: "The agent assigns a slot and estimated unloading time" },
-          { caption: "The truck queue in real time, seen from the plant" },
-          { caption: "Slot and dock administration panel" },
-          { caption: "Automatic notice to the next truck in the queue" },
-          { caption: "Unloading history with material and tonnage" },
+          {
+            src: "/fincas/whatsapp.png",
+            caption:
+              "A resident reports a breakdown over WhatsApp; the agent structures it, confirms the details and tells them a provider is already handling it.",
+          },
+          {
+            src: "/fincas/incidencias.png",
+            caption:
+              "The manager's incident panel: every report with its community, priority and status.",
+          },
+          {
+            src: "/fincas/reglas-alerta.png",
+            caption:
+              "Alert rules: by urgency or keywords, they define who gets notified and through which channel.",
+          },
+          {
+            src: "/fincas/proveedores.png",
+            caption:
+              "Providers tied to each community by activity, ready to receive the notice for the required service.",
+          },
+          {
+            src: "/fincas/complejos.png",
+            caption:
+              "Communities, housing estates, industrial parks and commercial areas, with a specific address or a scattered location.",
+          },
+          {
+            src: "/fincas/propiedades.png",
+            caption:
+              "Each property with its verification code: the resident identifies themselves and only accesses their own community.",
+          },
         ],
       },
       {
-        id: "reservas-whatsapp",
-        sector: "Hair salon",
-        title: "WhatsApp booking agent",
+        id: "logistica",
+        sector: "Agri-food industry",
+        title: "Silo unloading planner",
         paragraphs: [
-          "The salon's phone rang while clients were being attended: half-written appointments, unrecorded changes and lost slots.",
-          "A WhatsApp agent manages the calendar with real availability: it books, changes and cancels appointments in natural conversation. Including the hard part — time zones, daylight-saving changes and weekend edge cases that used to break appointments.",
-          "The salon stopped losing bookings outside opening hours and the calendar stays consistent without manual work.",
+          "An agri-food plant coordinated its truck intake —around 77 trips a week— with an Excel file and a macro: one person noted every change from the hauliers over the phone (a different weight, another time, cancellations, extra trips) and hit «update». Fragile and dependent on that person: if they weren't around, the plan didn't move, and with the silo full or empty that means trucks waiting or production stopped.",
+          "The system replaces that Excel with a web app that replicates its simulation engine and brings it to real time: it models the silo level across the whole week, decides when each truck unloads based on free space, prioritises critical trips and anticipates delays and stoppages before they happen.",
+          "The key is that drivers, plant staff, mechanics and supervisors talk to the system over Telegram. The system orchestrates everything: on any change —a delay, a different weight, an incident— it recalculates the sequencing, updates the dashboard chart with the new consumption and intakes, and notifies everyone affected. The manager goes from typing into an Excel to supervising a panel that keeps itself up to date.",
+          "It turns a manual, fragile flow into a centralised system, accessible from any browser and auditable, and gives early visibility of a plant's two costly problems: a full silo (trucks waiting) and an empty silo (production stopped). The next phase, already planned, is to connect it to the plant's SCADA to read the real level directly.",
         ],
-        stack: ["WhatsApp · Evolution API", "n8n", "Claude API"],
+        stack: ["React / Vite", "Recharts", "Node / Express", "PostgreSQL", "Telegram"],
         captures: [
-          { caption: "A complete booking, from greeting to confirmation" },
-          { caption: "Rescheduling an existing appointment in two messages" },
-          { caption: "A cancellation with the slot freed instantly" },
-          { caption: "The salon's calendar, in sync" },
-          { caption: "Edge case solved: a booking across a DST change" },
-        ],
-      },
-      {
-        id: "pedidos-erp",
-        sector: "Organic distribution",
-        title: "Email orders straight into the ERP",
-        paragraphs: [
-          "Every morning someone transcribed the orders arriving by email by hand: SKUs, quantities, variants. Slow, and with errors that ended up in the delivery round.",
-          "A pipeline reads incoming email, an LLM parses each order and validates it against the catalogue, and the order is created in Odoo via JSON-RPC. Doubtful SKUs are flagged for review instead of guessed.",
-          "From inbox to registered order, hands-off, with exceptions flagged so a person only decides where it adds value.",
-        ],
-        stack: ["LLM", "Odoo · JSON-RPC", "Node.js"],
-        captures: [
-          { caption: "The original order email, as it arrives" },
-          { caption: "The LLM's interpretation: lines, SKUs and quantities" },
-          { caption: "The order created automatically in Odoo" },
-          { caption: "A doubtful SKU flagged for human review" },
-          { caption: "The pipeline's activity log" },
-        ],
-      },
-      {
-        id: "dispatch-recogidas",
-        sector: "Waste management",
-        title: "Pickup dispatch system",
-        paragraphs: [
-          "The pickup operation was coordinated over phone calls and WhatsApp groups: nobody had the full picture and proof-of-service photos arrived late or not at all.",
-          "A single flow puts it in order: a Kanban board for the office, a PWA for drivers with their route of the day, a photo inbox over Telegram from the truck and automatic WhatsApp alerts to the client.",
-          "Every pickup is documented on the spot, and the office sees the state of the whole fleet at a glance.",
-        ],
-        stack: ["PWA", "React", "Telegram", "WhatsApp", "Node.js"],
-        captures: [
-          { caption: "The office's Kanban board" },
-          { caption: "The driver's PWA with their route of the day" },
-          { caption: "Service photos sent over Telegram from the truck" },
-          { caption: "WhatsApp alert to the client confirming the pickup" },
-          { caption: "Detail of a completed, documented pickup" },
-          { caption: "Overview of the operation in real time" },
+          {
+            src: "/logistica/1dashboard.png",
+            caption:
+              "Dashboard: the silo level as a «sawtooth» across the week, with truck intakes and consumption, plus the KPIs for stoppage hours and delayed trips.",
+          },
+          {
+            src: "/logistica/2secuenciacion.png",
+            caption:
+              "Automatic sequencing: each trip with its real unloading time, the delay accrued when there's no space and critical trips prioritised. Editable inline.",
+          },
+          {
+            src: "/logistica/3productivididad.png",
+            caption:
+              "Configurable consumption by time bands: the flow rate of each hopper is set per day and hour —weekends included— to model peaks or extend consumption.",
+          },
+          {
+            src: "/logistica/telegram.png",
+            caption:
+              "Drivers, plant, mechanics and supervisors talk to the system over Telegram: they confirm or report changes and the system recalculates the sequence and notifies everyone affected.",
+          },
         ],
       },
     ],
-    groups: [
+    others: [
       {
-        name: "Conversational agents",
-        items: [
-          {
-            sector: "Restaurants",
-            title: "After-hours WhatsApp attention",
-            description:
-              "A relay that handles messages when the business is closed: answers frequent questions and notes down bookings to confirm in the morning.",
-            stack: ["WhatsApp", "n8n", "Claude API"],
-          },
-          {
-            sector: "Media",
-            title: "Conversational agent for a podcast",
-            description:
-              "Talks with the audience guided by a state machine: recommends episodes, collects suggestions and keeps the thread between visits.",
-            stack: ["Telegram", "FSM", "LLM"],
-          },
-          {
-            sector: "Services",
-            title: "Voice agent for appointments",
-            description:
-              "A voice receptionist that takes the call, checks real availability and leaves the appointment confirmed before hanging up.",
-            stack: ["Vapi", "ElevenLabs", "n8n"],
-          },
-        ],
+        category: "Conversational agents",
+        title: "WhatsApp bookings with CRM",
+        description:
+          "Integrated with dental clinics' CRM to book, cancel, modify and remind appointments, working on the CRM's own data and calendar.",
+        stack: ["WhatsApp", "Nubimed CRM", "n8n", "LLM", "PostgreSQL"],
       },
       {
-        name: "Integrations & data",
-        items: [
-          {
-            sector: "Food industry",
-            title: "Meat product traceability",
-            description:
-              "From PDF and Excel delivery notes to traceability codes generated and validated automatically, with no manual transcription.",
-            stack: ["PDF/Excel", "LLM", "Node.js"],
-          },
-          {
-            sector: "Industrial services",
-            title: "Multi-actor incident platform",
-            description:
-              "Recording and tracking of incidents between client, technicians and office, with states, owners and automatic notifications.",
-            stack: ["React", "Node.js", "PostgreSQL"],
-          },
-          {
-            sector: "Real estate",
-            title: "Automated market reports",
-            description:
-              "An agent that crawls listing sites, matches the data against the client's criteria and sends a periodic report with filtered opportunities.",
-            stack: ["Scraping", "LLM", "n8n"],
-          },
-        ],
+        category: "Conversational agents",
+        title: "WhatsApp bookings with Google Calendar",
+        description:
+          "Appointment booking for small traditional businesses with no CRM, managing the schedule directly on Google Calendar.",
+        stack: ["WhatsApp", "n8n", "LLM", "React / Node.js", "PostgreSQL"],
       },
       {
-        name: "Web & back office",
-        items: [
-          {
-            sector: "Consulting",
-            title: "Multilingual corporate website",
-            description:
-              "A corporate site in three languages with technical SEO, careful performance and self-hosted deployment on own infrastructure.",
-            stack: ["Next.js", "Tailwind", "Docker"],
-          },
-          {
-            sector: "Industry",
-            title: "RAG assistant over internal documentation",
-            description:
-              "An internal chat that answers citing the company's work instructions and technical sheets as its only source.",
-            stack: ["RAG", "Vector DB", "Claude API"],
-          },
-        ],
+        category: "Conversational agents",
+        title: "Assistant for WooCommerce and Shopify",
+        description:
+          "Post-sale support and guidance during purchase or product search, on WhatsApp and as a web widget.",
+        stack: ["WhatsApp", "Chatwoot", "n8n", "Qdrant", "PostgreSQL"],
+      },
+      {
+        category: "Conversational agents",
+        title: "RAG assistant over internal documentation",
+        description:
+          "An internal chat that answers citing the company's work instructions and technical sheets as its only source.",
+        stack: ["React / Node.js", "n8n", "Qdrant", "PostgreSQL", "OpenAI API"],
+      },
+      {
+        category: "Sales & lead-gen",
+        title: "Automated sales funnel on social media",
+        description:
+          "Automates conversations like a setter and guides the lead until they ask for a call or a sign-up link.",
+        stack: ["Instagram", "n8n", "LLM", "Chatwoot", "PostgreSQL"],
+      },
+      {
+        category: "Sales & lead-gen",
+        title: "CRM for real-estate agencies",
+        description:
+          "Classifies opportunities, follows up on leads and cross-checks data against the agency's criteria; hands off to a person when needed.",
+        stack: ["React / Node.js", "LLM", "WhatsApp", "PostgreSQL", "n8n"],
+      },
+      {
+        category: "Integrations & data",
+        title: "Email orders straight into the ERP",
+        description:
+          "A pipeline reads orders arriving by email, an LLM parses them —references, quantities, variants— and creates them in the ERP. From inbox to registered order, hands-off.",
+        stack: ["LLM", "Odoo · JSON-RPC", "Node.js"],
+      },
+      {
+        category: "Integrations & data",
+        title: "Traceability in the meat industry",
+        description:
+          "Reads paper delivery notes —hundreds of lines once typed in one by one— from a photo or scan, and pushes every item into the ERP automatically.",
+        stack: ["OCR", "LLM", "Client ERP", "n8n", "Google Drive"],
       },
     ],
   },

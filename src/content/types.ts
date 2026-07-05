@@ -40,15 +40,11 @@ export interface FeaturedCase {
 }
 
 export interface MiniCase {
-  sector: string;
+  /** Categoría mostrada como etiqueta en la tarjeta (antes agrupaba los casos). */
+  category: string;
   title: string;
   description: string;
   stack: string[];
-}
-
-export interface CaseGroup {
-  name: string;
-  items: MiniCase[];
 }
 
 export interface SiteContent {
@@ -101,8 +97,11 @@ export interface SiteContent {
     capturePending: string;
     /** Etiqueta accesible del botón de cerrar el lightbox. */
     lightboxClose: string;
+    /** Enlace al final de la página para volver a la home. */
+    backHome: string;
     featured: FeaturedCase[];
-    groups: CaseGroup[];
+    /** Casos breves, en lista plana; cada uno lleva su categoría como etiqueta. */
+    others: MiniCase[];
   };
   education: {
     title: string;

@@ -66,36 +66,20 @@ export const es: SiteContent = {
     intro: "Casos reales en producción. Problema, solución e impacto.",
     cases: [
       {
-        id: "descargas-camiones",
-        sector: "Valorización de residuos",
-        title: "Agente IA para coordinar descargas de camiones",
+        id: "fincas",
+        sector: "Gestión de fincas",
+        title: "Gestión de comunidades y fincas",
         description:
-          "Los camiones llegaban sin orden y la báscula era un cuello de botella. Un agente en Telegram coordina ahora las descargas: los transportistas anuncian su llegada, el agente asigna turno y la planta ve la cola en tiempo real.",
-        stack: ["Telegram", "Claude API", "n8n", "PostgreSQL"],
+          "Software para administradores de fincas con un agente de IA en WhatsApp. Los vecinos se identifican por su vivienda, consultan dudas frecuentes sobre su comunidad y reportan incidencias; el sistema avisa a quien corresponda y coordina a los proveedores hasta cerrarlas.",
+        stack: ["WhatsApp", "Claude API", "React / Node.js", "Qdrant", "PostgreSQL"],
       },
       {
-        id: "reservas-whatsapp",
-        sector: "Peluquería",
-        title: "Agente de reservas por WhatsApp",
+        id: "logistica",
+        sector: "Industria agroalimentaria",
+        title: "Planificador de descargas en silo",
         description:
-          "Gestiona disponibilidad real, cambios y cancelaciones. Incluye la parte difícil: zonas horarias, cambios de hora (DST) y casos límite de fin de semana que rompían las citas.",
-        stack: ["WhatsApp · Evolution API", "n8n", "Claude API"],
-      },
-      {
-        id: "pedidos-erp",
-        sector: "Distribución ecológica",
-        title: "Pedidos por email directos al ERP",
-        description:
-          "Un pipeline lee los pedidos que llegan por correo, un LLM los interpreta (referencias, cantidades, variantes) y los crea en Odoo vía JSON-RPC. De la bandeja de entrada a pedido registrado, sin manos.",
-        stack: ["LLM", "Odoo · JSON-RPC", "Node.js"],
-      },
-      {
-        id: "dispatch-recogidas",
-        sector: "Gestión de residuos",
-        title: "Sistema de dispatch de recogidas",
-        description:
-          "Tablero Kanban para la oficina, PWA para conductores, buzón de fotos por Telegram y avisos por WhatsApp. Toda la operación de recogida coordinada en un solo flujo.",
-        stack: ["PWA", "React", "Telegram", "WhatsApp", "Node.js"],
+          "App web que planifica en tiempo real la recepción de camiones de una planta: simula el nivel del silo, secuencia las descargas y anticipa retrasos y paradas. Conductores y personal hablan con el sistema por Telegram y el plan se recalcula solo.",
+        stack: ["React / Vite", "Recharts", "Node / Express", "PostgreSQL", "Telegram"],
       },
     ],
     viewAll: "Ver más proyectos",
@@ -104,164 +88,154 @@ export const es: SiteContent = {
   cases: {
     metaTitle: "Casos — Fernando Bermúdez",
     metaDescription:
-      "Doce casos reales de automatización, agentes de IA e integraciones en producción: agentes conversacionales, pipelines de datos y sistemas a medida.",
+      "Casos reales de automatización, agentes de IA e integraciones en producción: agentes conversacionales, pipelines de datos y sistemas a medida.",
     breadcrumbHome: "Inicio",
     eyebrow: "Casos",
     title: "Casos en producción",
     intro:
-      "Sistemas construidos a medida que hoy funcionan en empresas reales. Los cuatro primeros, con más detalle y capturas; el resto, en versión breve.",
+      "Sistemas construidos a medida que a día de hoy están funcionando en empresas de diferentes sectores.",
     othersTitle: "Más casos",
     galleryPrev: "Captura anterior",
     galleryNext: "Captura siguiente",
     capturePending: "Captura en preparación",
     lightboxClose: "Cerrar",
+    backHome: "Volver a inicio",
     featured: [
       {
-        id: "descargas-camiones",
-        sector: "Valorización de residuos",
-        title: "Agente IA para coordinar descargas de camiones",
+        id: "fincas",
+        sector: "Gestión de fincas",
+        title: "Gestión de comunidades y fincas",
         paragraphs: [
-          "Los camiones llegaban a planta sin orden previo: colas en la báscula, llamadas cruzadas y una operativa que dependía de la memoria de quien estuviera en recepción ese día.",
-          "Un agente en Telegram coordina ahora las descargas: los transportistas anuncian su llegada desde la cabina, el agente les asigna turno según el material y el muelle disponible, y la planta ve la cola en tiempo real.",
-          "El resultado: menos esperas en báscula, cero llamadas de coordinación y un registro completo de cada descarga sin que nadie apunte nada a mano.",
+          "Administrar comunidades es responder las mismas dudas una y otra vez y recibir avisos por teléfono, correo y grupos de WhatsApp sueltos: una avería se comunica como se puede, coordinar al proveedor lleva tiempo y, al resolverse, cuesta saber qué pasó y a quién se avisó.",
+          "Un software de gestión de comunidades con un agente de IA en WhatsApp como puerta de entrada. Cada vecino se identifica con el código de su vivienda, así el sistema lo reconoce y solo consulta y reporta sobre su comunidad. El administrador sube a una sección de documentos todo lo relativo a cada comunidad, y el agente responde con esa documentación las preguntas frecuentes de los vecinos —normas, cuotas, contactos— citando la fuente.",
+          "Cuando el aviso es una incidencia, el agente la registra de forma estructurada y unas reglas de alerta, por nivel de urgencia o por palabras clave, deciden a quién se notifica (vecinos, administrador o proveedores) y por qué canal. Con la gestión de proveedores integrada, el sistema abre la conversación con los del servicio requerido asociados a esa comunidad; cuando uno confirma, se avisa a todos de que está cubierta. Cada incidencia se edita y se va anotando, dejando trazabilidad de lo ocurrido hasta el cierre.",
+          "El administrador deja de perseguir avisos por canales dispersos y de repetir las mismas respuestas: los vecinos escriben por donde ya escriben, resuelven sus dudas al momento y cada incidencia queda documentada y coordinada sola con el proveedor. Funciona igual para comunidades de vecinos, urbanizaciones, polígonos industriales y zonas comerciales, con dirección concreta o ubicación dispersa.",
         ],
-        stack: ["Telegram", "Claude API", "n8n", "PostgreSQL"],
+        stack: ["WhatsApp", "Claude API", "React / Node.js", "Qdrant", "PostgreSQL"],
         captures: [
-          { caption: "Un transportista anuncia su llegada desde la cabina" },
-          { caption: "El agente asigna turno y hora estimada de descarga" },
-          { caption: "La cola de camiones en tiempo real, vista desde planta" },
-          { caption: "Panel de administración de turnos y muelles" },
-          { caption: "Aviso automático al siguiente camión de la cola" },
-          { caption: "Histórico de descargas con material y tonelaje" },
+          {
+            src: "/fincas/whatsapp.png",
+            caption:
+              "Un vecino reporta una avería por WhatsApp; el agente la estructura, confirma los datos y avisa de que un proveedor ya la gestiona.",
+          },
+          {
+            src: "/fincas/incidencias.png",
+            caption:
+              "Panel de incidencias del administrador: cada aviso con su comunidad, prioridad y estado.",
+          },
+          {
+            src: "/fincas/reglas-alerta.png",
+            caption:
+              "Reglas de alerta: por urgencia o palabras clave, definen a quién se notifica y por qué canal.",
+          },
+          {
+            src: "/fincas/proveedores.png",
+            caption:
+              "Proveedores asociados a cada comunidad por actividad, listos para recibir el aviso del servicio requerido.",
+          },
+          {
+            src: "/fincas/complejos.png",
+            caption:
+              "Comunidades, urbanizaciones, polígonos industriales y zonas comerciales, con dirección concreta o ubicación dispersa.",
+          },
+          {
+            src: "/fincas/propiedades.png",
+            caption:
+              "Cada propiedad con su código de verificación: el vecino se identifica y solo accede a lo de su comunidad.",
+          },
         ],
       },
       {
-        id: "reservas-whatsapp",
-        sector: "Peluquería",
-        title: "Agente de reservas por WhatsApp",
+        id: "logistica",
+        sector: "Industria agroalimentaria",
+        title: "Planificador de descargas en silo",
         paragraphs: [
-          "El teléfono del salón sonaba mientras se atendía a clientes: citas apuntadas a medias, cambios que no se registraban y huecos perdidos.",
-          "Un agente de WhatsApp gestiona la agenda con disponibilidad real: reserva, cambia y cancela citas conversando con naturalidad. Incluye la parte difícil — zonas horarias, cambios de hora (DST) y casos límite de fin de semana que rompían las citas.",
-          "El salón dejó de perder reservas fuera de horario y la agenda se mantiene coherente sin intervención manual.",
+          "Una planta agroalimentaria coordinaba la recepción de camiones —unos 77 viajes por semana— con un Excel y una macro: una persona apuntaba por teléfono cada cambio de los transportistas (otro peso, otra hora, cancelaciones, viajes extra) y pulsaba «actualizar». Frágil y dependiente de esa persona: si no estaba, la planificación no se movía, y con el silo lleno o vacío eso son camiones esperando o producción parada.",
+          "El sistema sustituye ese Excel por una app web que replica su motor de simulación y lo lleva a tiempo real: modela el nivel del silo durante toda la semana, decide cuándo descarga cada camión según el espacio libre, prioriza los viajes críticos y anticipa retrasos y paradas antes de que ocurran.",
+          "La clave es que conductores, personal de planta, mecánicos y supervisores hablan con el sistema por Telegram. El sistema lo orquesta todo: ante un cambio —un retraso, otro peso, una incidencia— recalcula la secuenciación, actualiza el gráfico del dashboard con el nuevo consumo y las entradas, y avisa a los implicados. El responsable pasa de teclear en un Excel a supervisar un panel que se mantiene solo.",
+          "Convierte un flujo manual y frágil en un sistema centralizado, accesible desde cualquier navegador y auditable, y da visibilidad anticipada de los dos problemas caros de una planta: silo lleno (camiones esperando) y silo vacío (parada de producción). La siguiente fase, ya prevista, es conectarlo al SCADA de la planta para leer el nivel real directamente.",
         ],
-        stack: ["WhatsApp · Evolution API", "n8n", "Claude API"],
+        stack: ["React / Vite", "Recharts", "Node / Express", "PostgreSQL", "Telegram"],
         captures: [
-          { caption: "Una reserva completa, de saludo a confirmación" },
-          { caption: "Cambio de una cita existente en dos mensajes" },
-          { caption: "Cancelación con el hueco liberado al momento" },
-          { caption: "La agenda del salón, sincronizada" },
-          { caption: "Caso límite resuelto: reserva sobre un cambio de hora (DST)" },
-        ],
-      },
-      {
-        id: "pedidos-erp",
-        sector: "Distribución ecológica",
-        title: "Pedidos por email directos al ERP",
-        paragraphs: [
-          "Cada mañana, una persona transcribía a mano los pedidos que llegaban por correo: referencias, cantidades, variantes. Lento y con errores que acababan en el reparto.",
-          "Un pipeline lee los correos entrantes, un LLM interpreta cada pedido y lo valida contra el catálogo, y el pedido se crea en Odoo vía JSON-RPC. Las referencias dudosas se marcan para revisión en vez de adivinarse.",
-          "De la bandeja de entrada al pedido registrado sin manos, con las excepciones señaladas para que una persona decida solo donde aporta.",
-        ],
-        stack: ["LLM", "Odoo · JSON-RPC", "Node.js"],
-        captures: [
-          { caption: "El email de pedido original, tal como llega" },
-          { caption: "La interpretación del LLM: líneas, referencias y cantidades" },
-          { caption: "El pedido creado automáticamente en Odoo" },
-          { caption: "Una referencia dudosa marcada para revisión humana" },
-          { caption: "Registro de actividad del pipeline" },
-        ],
-      },
-      {
-        id: "dispatch-recogidas",
-        sector: "Gestión de residuos",
-        title: "Sistema de dispatch de recogidas",
-        paragraphs: [
-          "La operación de recogidas se coordinaba por llamadas y grupos de WhatsApp: nadie tenía la foto completa y los justificantes llegaban tarde o no llegaban.",
-          "Un solo flujo lo ordena todo: tablero Kanban para la oficina, PWA para los conductores con su ruta del día, buzón de fotos por Telegram desde el camión y avisos automáticos por WhatsApp al cliente.",
-          "Cada recogida queda documentada en el momento, y la oficina ve el estado de toda la flota de un vistazo.",
-        ],
-        stack: ["PWA", "React", "Telegram", "WhatsApp", "Node.js"],
-        captures: [
-          { caption: "El tablero Kanban de la oficina" },
-          { caption: "La PWA del conductor con su ruta del día" },
-          { caption: "Fotos del servicio enviadas por Telegram desde el camión" },
-          { caption: "Aviso de WhatsApp al cliente con la recogida confirmada" },
-          { caption: "Detalle de una recogida completada y documentada" },
-          { caption: "Vista general de la operación en tiempo real" },
+          {
+            src: "/logistica/1dashboard.png",
+            caption:
+              "Dashboard: el nivel del silo en «dientes de sierra» durante la semana, con las entradas de camión y el consumo, y los KPIs de horas de parada y viajes con retraso.",
+          },
+          {
+            src: "/logistica/2secuenciacion.png",
+            caption:
+              "Secuenciación automática: cada viaje con su hora real de descarga, el retraso acumulado cuando no hay espacio y los viajes críticos priorizados. Editable en línea.",
+          },
+          {
+            src: "/logistica/3productivididad.png",
+            caption:
+              "Consumo configurable por franjas: se define el caudal de cada tolva por día y hora —incluido el fin de semana— para modelar picos o ampliar el consumo.",
+          },
+          {
+            src: "/logistica/telegram.png",
+            caption:
+              "Conductores, planta, mecánicos y supervisores hablan con el sistema por Telegram: confirman o comunican cambios y el sistema recalcula la secuencia y avisa a los implicados.",
+          },
         ],
       },
     ],
-    groups: [
+    others: [
       {
-        name: "Agentes conversacionales",
-        items: [
-          {
-            sector: "Restauración",
-            title: "Atención de WhatsApp fuera de horario",
-            description:
-              "Relay que atiende los mensajes cuando el negocio está cerrado: responde dudas frecuentes y deja las reservas anotadas para confirmar por la mañana.",
-            stack: ["WhatsApp", "n8n", "Claude API"],
-          },
-          {
-            sector: "Media",
-            title: "Agente conversacional para un podcast",
-            description:
-              "Conversa con la audiencia guiado por una máquina de estados: recomienda episodios, recoge sugerencias y mantiene el hilo entre visitas.",
-            stack: ["Telegram", "FSM", "LLM"],
-          },
-          {
-            sector: "Servicios",
-            title: "Agente de voz para citas",
-            description:
-              "Recepcionista de voz que atiende la llamada, consulta disponibilidad real y deja la cita confirmada antes de colgar.",
-            stack: ["Vapi", "ElevenLabs", "n8n"],
-          },
-        ],
+        category: "Agentes conversacionales",
+        title: "Reservas por WhatsApp con CRM",
+        description:
+          "Integración con el CRM de clínicas dentales para reservar, cancelar, modificar y recordar citas, trabajando sobre los datos y el calendario del propio CRM.",
+        stack: ["WhatsApp", "Nubimed CRM", "n8n", "LLM", "PostgreSQL"],
       },
       {
-        name: "Integraciones y datos",
-        items: [
-          {
-            sector: "Alimentación",
-            title: "Trazabilidad de producto cárnico",
-            description:
-              "De albaranes en PDF y Excel a códigos de trazabilidad generados y validados automáticamente, sin transcripción manual.",
-            stack: ["PDF/Excel", "LLM", "Node.js"],
-          },
-          {
-            sector: "Servicios industriales",
-            title: "Plataforma de incidencias multi-actor",
-            description:
-              "Registro y seguimiento de incidencias entre cliente, técnicos y oficina, con estados, responsables y avisos automáticos.",
-            stack: ["React", "Node.js", "PostgreSQL"],
-          },
-          {
-            sector: "Inmobiliario",
-            title: "Informes automáticos de mercado",
-            description:
-              "Agente que rastrea portales, cruza los datos con los criterios del cliente y envía un informe periódico con oportunidades filtradas.",
-            stack: ["Scraping", "LLM", "n8n"],
-          },
-        ],
+        category: "Agentes conversacionales",
+        title: "Reservas por WhatsApp con Google Calendar",
+        description:
+          "Reserva de citas para pequeños negocios tradicionales sin CRM, gestionando la agenda directamente sobre Google Calendar.",
+        stack: ["WhatsApp", "n8n", "LLM", "React / Node.js", "PostgreSQL"],
       },
       {
-        name: "Web y backoffice",
-        items: [
-          {
-            sector: "Consultoría",
-            title: "Web corporativa multiidioma",
-            description:
-              "Sitio corporativo en tres idiomas con SEO técnico, rendimiento cuidado y despliegue autoalojado en infraestructura propia.",
-            stack: ["Next.js", "Tailwind", "Docker"],
-          },
-          {
-            sector: "Industria",
-            title: "Asistente RAG sobre documentación interna",
-            description:
-              "Chat interno que responde citando las instrucciones de trabajo y fichas técnicas de la empresa como única fuente.",
-            stack: ["RAG", "Base vectorial", "Claude API"],
-          },
-        ],
+        category: "Agentes conversacionales",
+        title: "Asistente para WooCommerce y Shopify",
+        description:
+          "Atención posventa y orientación durante la compra o la búsqueda de productos, en WhatsApp y como widget web.",
+        stack: ["WhatsApp", "Chatwoot", "n8n", "Qdrant", "PostgreSQL"],
+      },
+      {
+        category: "Agentes conversacionales",
+        title: "Asistente RAG sobre documentación interna",
+        description:
+          "Chat interno que responde citando las instrucciones de trabajo y fichas técnicas de la empresa como única fuente.",
+        stack: ["React / Node.js", "n8n", "Qdrant", "PostgreSQL", "OpenAI API"],
+      },
+      {
+        category: "Ventas y captación",
+        title: "Funnel de ventas en redes sociales",
+        description:
+          "Automatiza las conversaciones como un setter y conduce al lead hasta que pide una llamada o un enlace de registro.",
+        stack: ["Instagram", "n8n", "LLM", "Chatwoot", "PostgreSQL"],
+      },
+      {
+        category: "Ventas y captación",
+        title: "CRM para agencias inmobiliarias",
+        description:
+          "Clasifica oportunidades, hace seguimiento de los leads y cruza los datos con los criterios de la agencia; deriva a una persona los casos que lo requieren.",
+        stack: ["React / Node.js", "LLM", "WhatsApp", "PostgreSQL", "n8n"],
+      },
+      {
+        category: "Integraciones y datos",
+        title: "Pedidos por email directos al ERP",
+        description:
+          "Un pipeline lee los pedidos que llegan por correo, un LLM los interpreta —referencias, cantidades, variantes— y los crea en el ERP. De la bandeja de entrada a pedido registrado, sin manos.",
+        stack: ["LLM", "Odoo · JSON-RPC", "Node.js"],
+      },
+      {
+        category: "Integraciones y datos",
+        title: "Trazabilidad en industria cárnica",
+        description:
+          "Lee albaranes en papel —cientos de líneas que antes se tecleaban una a una— desde una foto o un escaneo, y vuelca cada artículo en el ERP automáticamente.",
+        stack: ["OCR", "LLM", "ERP cliente", "n8n", "Google Drive"],
       },
     ],
   },
