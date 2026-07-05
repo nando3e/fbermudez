@@ -8,7 +8,7 @@ export const es: SiteContent = {
   },
   nav: {
     about: "Perfil",
-    skills: "Skills",
+    skills: "Cómo trabajo",
     projects: "Proyectos",
     education: "Formación",
     contact: "Contacto",
@@ -27,7 +27,7 @@ export const es: SiteContent = {
     ctaAssistant: "Probar un agente IA",
   },
   skills: {
-    title: "Skills",
+    title: "Cómo trabajo",
     groups: [
       {
         name: "Automatización & IA",
@@ -52,7 +52,7 @@ export const es: SiteContent = {
       {
         name: "DevOps & infra",
         description:
-          "Despliegues en VPS con Docker: cada proyecto de cada cliente aislado y trazable, en contenedores, sin depender de plataformas cerradas.",
+          "Despliegues en VPS con Docker: cada cliente y su proyecto separado con sus propias instancias, sin compartir contenedores y con trazabilidad absoluta.",
       },
       {
         name: "Metodología",
