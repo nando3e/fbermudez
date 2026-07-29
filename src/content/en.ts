@@ -285,7 +285,7 @@ export const en: SiteContent = {
     linkedinCta: "Take a look at my LinkedIn",
     downloads: {
       title: "Documents",
-      cv: "Résumé",
+      cv: "CV",
       portfolio: "Technical portfolio",
       downloadAction: "Download",
     },
