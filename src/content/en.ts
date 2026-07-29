@@ -99,10 +99,7 @@ export const en: SiteContent = {
     capturePending: "Screenshot in preparation",
     lightboxClose: "Close",
     backHome: "Back to home",
-    downloads: {
-      title: "Download",
-      text: "All these cases, collected in a single PDF.",
-    },
+    downloadsTitle: "Download",
     featured: [
       {
         id: "fincas",
@@ -290,7 +287,6 @@ export const en: SiteContent = {
       title: "Documents",
       cv: "Résumé",
       portfolio: "Technical portfolio",
-      alsoIn: "Also in",
       downloadAction: "Download",
     },
   },

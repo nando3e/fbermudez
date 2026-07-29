@@ -134,8 +134,7 @@ export function CasesArticle({
             content={content}
             locale={locale}
             ids={["portfolio"]}
-            title={cases.downloads.title}
-            text={cases.downloads.text}
+            title={cases.downloadsTitle}
             className="mt-20 border-t border-border pt-12"
           />
         </Reveal>

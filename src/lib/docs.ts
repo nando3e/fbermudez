@@ -1,4 +1,4 @@
-import { statSync } from "node:fs";
+import { existsSync } from "node:fs";
 import path from "node:path";
 import { locales, type Locale } from "@/content/types";
 
@@ -11,62 +11,22 @@ const baseNames = {
 
 export type DocId = keyof typeof baseNames;
 
-export interface DocVersion {
-  locale: Locale;
-  href: string;
-  /** Tamaño ya formateado para el idioma en curso ("2,9 MB"). */
-  size: string;
-}
-
-export interface DocDownload {
-  /** Versión del botón principal: la del idioma activo si existe. */
-  main: DocVersion;
-  /** Resto de idiomas disponibles, en el orden de `locales`. */
-  others: DocVersion[];
-}
-
 const docsDir = path.join(process.cwd(), "public", "docs");
 
-function formatSize(bytes: number, locale: Locale): string {
-  if (bytes >= 1_000_000) {
-    const mb = new Intl.NumberFormat(locale, {
-      maximumFractionDigits: 1,
-    }).format(bytes / 1_000_000);
-    return `${mb} MB`;
-  }
-  return `${Math.round(bytes / 1000)} KB`;
-}
-
-function readVersion(
-  id: DocId,
-  fileLocale: Locale,
-  displayLocale: Locale,
-): DocVersion | null {
-  const file = `${baseNames[id]}-${fileLocale}.pdf`;
-  try {
-    const { size } = statSync(path.join(docsDir, file));
-    return {
-      locale: fileLocale,
-      href: `/docs/${file}`,
-      size: formatSize(size, displayLocale),
-    };
-  } catch {
-    return null; // Ese idioma todavía no está subido.
-  }
+function hrefIfExists(id: DocId, locale: Locale): string | null {
+  const file = `${baseNames[id]}-${locale}.pdf`;
+  return existsSync(path.join(docsDir, file)) ? `/docs/${file}` : null;
 }
 
 /**
- * Resuelve un documento para el idioma activo. Si aún no existe traducido,
- * el botón principal cae al primer idioma disponible. Devuelve null cuando no
- * hay ningún fichero: la tarjeta entonces no se pinta.
+ * Ruta del PDF en el idioma que se está visualizando. Si ese idioma todavía no
+ * está traducido cae al primero disponible; null cuando no hay ninguno, y
+ * entonces la tarjeta no se pinta.
  */
-export function getDoc(id: DocId, locale: Locale): DocDownload | null {
-  const versions = locales
-    .map((l) => readVersion(id, l, locale))
-    .filter((v): v is DocVersion => v !== null);
-
-  if (versions.length === 0) return null;
-
-  const main = versions.find((v) => v.locale === locale) ?? versions[0];
-  return { main, others: versions.filter((v) => v !== main) };
+export function getDocHref(id: DocId, locale: Locale): string | null {
+  for (const candidate of [locale, ...locales]) {
+    const href = hrefIfExists(id, candidate);
+    if (href) return href;
+  }
+  return null;
 }

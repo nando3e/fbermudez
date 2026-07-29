@@ -99,10 +99,7 @@ export const ca: SiteContent = {
     capturePending: "Captura en preparació",
     lightboxClose: "Tancar",
     backHome: "Tornar a l'inici",
-    downloads: {
-      title: "Descàrrega",
-      text: "Tots aquests casos, recollits en un únic PDF.",
-    },
+    downloadsTitle: "Descàrrega",
     featured: [
       {
         id: "fincas",
@@ -290,7 +287,6 @@ export const ca: SiteContent = {
       title: "Documentació",
       cv: "Currículum",
       portfolio: "Portfolio tècnic",
-      alsoIn: "També en",
       downloadAction: "Descarregar",
     },
   },

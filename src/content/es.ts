@@ -100,10 +100,7 @@ export const es: SiteContent = {
     capturePending: "Captura en preparación",
     lightboxClose: "Cerrar",
     backHome: "Volver a inicio",
-    downloads: {
-      title: "Descarga",
-      text: "Todos estos casos, recogidos en un único PDF.",
-    },
+    downloadsTitle: "Descarga",
     featured: [
       {
         id: "fincas",
@@ -291,7 +288,6 @@ export const es: SiteContent = {
       title: "Documentación",
       cv: "Currículum",
       portfolio: "Portfolio técnico",
-      alsoIn: "También en",
       downloadAction: "Descargar",
     },
   },
