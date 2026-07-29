@@ -99,6 +99,11 @@ export interface SiteContent {
     lightboxClose: string;
     /** Enlace al final de la página para volver a la home. */
     backHome: string;
+    /** Bloque de descarga del portfolio que cierra la página. */
+    downloads: {
+      title: string;
+      text: string;
+    };
     featured: FeaturedCase[];
     /** Casos breves, en lista plana; cada uno lleva su categoría como etiqueta. */
     others: MiniCase[];
@@ -122,6 +127,16 @@ export interface SiteContent {
     whatsappLabel: string;
     linkedinPrompt: string;
     linkedinCta: string;
+    /** Bloque de PDFs descargables al pie de la sección. */
+    downloads: {
+      title: string;
+      cv: string;
+      portfolio: string;
+      /** Prefijo de los enlaces a las otras traducciones: "También en". */
+      alsoIn: string;
+      /** Se antepone al nombre del documento en el aria-label del enlace. */
+      downloadAction: string;
+    };
   };
   footer: {
     legalNotice: string;

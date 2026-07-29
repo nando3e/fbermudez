@@ -61,7 +61,7 @@ export default async function Home({
       <Projects content={content} locale={locale as Locale} />
       <Education content={content} />
       <Assistant content={content} />
-      <Contact content={content} />
+      <Contact content={content} locale={locale as Locale} />
     </>
   );
 }

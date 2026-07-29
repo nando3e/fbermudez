@@ -99,6 +99,10 @@ export const en: SiteContent = {
     capturePending: "Screenshot in preparation",
     lightboxClose: "Close",
     backHome: "Back to home",
+    downloads: {
+      title: "Download",
+      text: "All these cases, collected in a single PDF.",
+    },
     featured: [
       {
         id: "fincas",
@@ -282,6 +286,13 @@ export const en: SiteContent = {
     whatsappLabel: "WhatsApp",
     linkedinPrompt: "Want to know more about me?",
     linkedinCta: "Take a look at my LinkedIn",
+    downloads: {
+      title: "Documents",
+      cv: "Résumé",
+      portfolio: "Technical portfolio",
+      alsoIn: "Also in",
+      downloadAction: "Download",
+    },
   },
   footer: {
     legalNotice: "Legal notice",

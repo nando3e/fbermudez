@@ -99,6 +99,10 @@ export const ca: SiteContent = {
     capturePending: "Captura en preparació",
     lightboxClose: "Tancar",
     backHome: "Tornar a l'inici",
+    downloads: {
+      title: "Descàrrega",
+      text: "Tots aquests casos, recollits en un únic PDF.",
+    },
     featured: [
       {
         id: "fincas",
@@ -282,6 +286,13 @@ export const ca: SiteContent = {
     whatsappLabel: "WhatsApp",
     linkedinPrompt: "Vols saber més de mi?",
     linkedinCta: "Fes una ullada al meu LinkedIn",
+    downloads: {
+      title: "Documentació",
+      cv: "Currículum",
+      portfolio: "Portfolio tècnic",
+      alsoIn: "També en",
+      downloadAction: "Descarregar",
+    },
   },
   footer: {
     legalNotice: "Avís legal",

@@ -1,13 +1,21 @@
 import type { SiteContent } from "@/content/types";
+import type { Locale } from "@/i18n/config";
 import { site } from "@/content/site";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { Reveal } from "@/components/ui/Reveal";
 import { ContactPhone } from "@/components/ui/ContactPhone";
+import { Downloads } from "@/components/ui/Downloads";
 import { MailIcon } from "@/components/ui/icons";
 
 // Los perfiles sociales (LinkedIn, GitHub) viven en el footer, no aquí:
 // esta sección es solo contacto directo.
-export function Contact({ content }: { content: SiteContent }) {
+export function Contact({
+  content,
+  locale,
+}: {
+  content: SiteContent;
+  locale: Locale;
+}) {
   const { contact } = content;
 
   return (
@@ -32,6 +40,8 @@ export function Contact({ content }: { content: SiteContent }) {
               whatsappLabel={contact.whatsappLabel}
             />
           </div>
+
+          <Downloads content={content} locale={locale} />
 
           {site.linkedin && (
             <p className="mt-12 text-sm text-muted">

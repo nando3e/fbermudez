@@ -2,6 +2,7 @@ import type { SiteContent } from "@/content/types";
 import type { Locale } from "@/i18n/config";
 import { Reveal } from "@/components/ui/Reveal";
 import { CaseGallery } from "./CaseGallery";
+import { Downloads } from "@/components/ui/Downloads";
 import { ArrowIcon } from "@/components/ui/icons";
 
 /**
@@ -127,6 +128,17 @@ export function CasesArticle({
             ))}
           </ul>
         </section>
+
+        <Reveal>
+          <Downloads
+            content={content}
+            locale={locale}
+            ids={["portfolio"]}
+            title={cases.downloads.title}
+            text={cases.downloads.text}
+            className="mt-20 border-t border-border pt-12"
+          />
+        </Reveal>
 
         <Reveal>
           <div className="mt-16 border-t border-border pt-10">
